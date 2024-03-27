@@ -28,32 +28,27 @@ class _SearchPageState extends State<SearchPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                int age = int.tryParse(searchAgeController.text.trim()) ?? 0;
-                if (age != 0) {
-                  repo.searchUser(age);
-                }
-                setState(() {});
-              },
+              onPressed: () => setState(() {}),
               child: const Icon(Icons.search),
             ),
             const SizedBox(height: 20),
             FutureBuilder(
               future: repo.searchUser(
-                  int.tryParse(searchAgeController.text.trim()) ?? 21),
+                  int.tryParse(searchAgeController.text.trim()) ?? 0),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return Text('Đã xảy ra lỗi: ${snapshot.error}');
+                  return Text('${snapshot.error}');
                 } else {
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final data = snapshot.data![index];
                         return ListTile(
                           title: Text(data.name ?? ""),
+                          subtitle: Text(data.age ?? ""),
                         );
                       },
                     ),
