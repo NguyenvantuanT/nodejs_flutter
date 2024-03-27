@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fontend/featch/Repo/repos.dart';
 import 'package:fontend/featch/components/my_alertdialog.dart';
 import 'package:fontend/featch/components/my_textbutton.dart';
+import 'package:fontend/featch/ui/search_page.dart';
 import 'package:fontend/model/user_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,6 +26,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("UserConnect"),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SearchPage())),
+              icon: const Icon(Icons.search))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

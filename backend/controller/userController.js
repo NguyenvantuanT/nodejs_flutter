@@ -43,9 +43,20 @@ const UserController = {
          } catch (e) {
              res.json(e);
          }
-    }
+    },
     
 
+    //SEARCH USER 
+    searchUser: async(req ,res)=> {
+        try {
+            const searchUser = req.query.age;
+            const user = await UserModel.find({age : searchUser});          
+            res.json(user);
+         } catch (e) {
+             res.json(e);
+         }
+    }
+   
 };
 
 

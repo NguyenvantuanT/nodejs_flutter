@@ -58,4 +58,21 @@ class Repo {
       throw Exception("Lỗi khi gửi yêu cầu POST");
     }
   }
+
+  Future<List<UserModel>> searchUser(int age) async {
+    try{
+      final response = await client.get(Uri.parse('$dataUrl/v1/user/search?age=$age'));
+      if(response.statusCode == 200){
+       List result = jsonDecode(response.body);
+        List<UserModel> userModel = result.map((e) => UserModel.fromJson(e)).toList();
+        print(userModel);
+        return userModel;
+      }else{
+        return [];
+      }
+    }catch(e){
+      throw Exception("Lỗi khi gửi yêu cầu POST");
+      
+    }
+  }
 }
